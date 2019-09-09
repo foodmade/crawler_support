@@ -1,39 +1,82 @@
 <template>
-    <div class="">
+    <div class="setting">
         <codemirror
                 ref="mycode"
                 :value="code"
                 :options="cmOptions"
-                class="code">
+                class="code" @ready="onCmReady" @focus="onCmFocus" @input="onCmCodeChange">
         </codemirror>
+
     </div>
 </template>
 
 <script>
-    import { codemirror } from 'vue-codemirror'
-    import "codemirror/theme/monokai.css"; // 这里引入的是主题样式，根据设置的theme的主题引入，一定要引入！！
-    require("codemirror/mode/javascript/javascript"); // 这里引入的模式的js，根据设置的mode引入，一定要引入！！
 
+    let CodeMirror = require("codemirror/lib/codemirror");
+
+    import "codemirror/theme/ambiance.css";
+    import "codemirror/lib/codemirror.css";
+    import "codemirror/addon/hint/show-hint.css";
+    import "codemirror/theme/monokai.css"; 
+
+    require("codemirror/addon/edit/matchbrackets");
+
+    require("codemirror/mode/javascript/javascript");
+
+    //代码折叠文件
+    require('codemirror/addon/fold/foldcode.js');
+    require('codemirror/addon/fold/foldgutter.js');
+    require('codemirror/addon/fold/brace-fold.js');
+
+    //选中行高亮文件
+    require('codemirror/addon/selection/active-line.js');
+    //缩进文件
+    require('codemirror/addon/fold/indent-fold.js');
+    //代码只能提示
+    require('codemirror/addon/hint/show-hint.js');
+    require('codemirror/addon/hint/sql-hint.js');
+    require("codemirror/addon/hint/javascript-hint");
+    //addon文件夹放的是Code Mirror的功能插件
+    require('codemirror/addon/fold/comment-fold.js');
+
+    
     export default {
         name: "codeMirror",
         data () {
             return {
-                code: 'function test ()',
+                code: '',
                 cmOptions:{
                     mode:"text/javascript",
                     theme: "monokai",
-                    readOnly:false,
                     indentWithTabs: true,
-                    smartIndent: false,
+                    smartIndent: true,
                     lineNumbers: true,
                     matchBrackets: true,
-                    lineSeparator:'\n'
+                    lineWrapping:true,
+                    indentUnit:4,
+                    showCursorWhenSelecting:true,
+                    autofocus:true,
+                    line: true,
+                    extraKeys:{"Ctrl-Space":"autocomplete"},//ctrl-space唤起智能提示
+                    hintOptions: {tables: {
+                        users: ["name", "score", "birthDate"],
+                        countries: ["name", "population", "size"]
+                    }},
                 }
             }
         },
-        components:{
-            codemirror
+        methods:{
+
         },
+        computed:{
+
+        },
+        mounted:{
+            
+        },
+        comments:{
+            CodeMirror
+        }
     }
 </script>
 

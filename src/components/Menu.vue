@@ -23,8 +23,8 @@
             return {
                 toPath: '',
                 navList:[
-                    {name:'/home',navItem:'工作台'},
-                    {name:'/record',navItem:'操作记录'},
+                    {name:'/home',navItem:'home'},
+                    {name:'/monaco',navItem:'monaco'},
                 ]
             };
         },

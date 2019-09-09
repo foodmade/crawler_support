@@ -7,7 +7,6 @@ import codemirror from 'vue-codemirror-lite'
 
 import Vue from 'vue'
 import App from './App.vue'
-import Container from './components/Container'
 
 Vue.use(ElementUI);
 Vue.use(codemirror);
@@ -18,7 +17,3 @@ new Vue({
     router,
     render: h => h(App),
 }).$mount('#app');
-
-Vue.component('container',{
-    template:Container
-});
